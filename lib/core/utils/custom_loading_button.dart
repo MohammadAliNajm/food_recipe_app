@@ -31,7 +31,7 @@ class CustomLoadingButton extends StatelessWidget {
               child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: SizedBox(
-                    height: 30,
+                    height: 35,
                     child: loading
                         ?const  Center(
                         child:  LoadingIndicator(
