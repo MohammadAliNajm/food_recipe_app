@@ -11,9 +11,10 @@ import '../../core/abstracts/states/state.dart';
 
 @injectable
 class ProductsCubit extends Cubit<States> {
-  ProductsCubit(this.productsRepo, ) : super(LoadingState());
+  ProductsCubit(
+    this.productsRepo,
+  ) : super(LoadingState());
   final ProductsRepo productsRepo;
- 
 
   getProducts(ProductsScreenState state, String q) {
     emit(LoadingState());
@@ -28,6 +29,7 @@ class ProductsCubit extends Cubit<States> {
         Map<String, dynamic> data = value.data;
 
         ProductResponse resp = ProductResponse.fromJson(data);
+        print(data);
         emit(ProductState(resp, state));
       }
     });

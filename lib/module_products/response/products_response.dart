@@ -45,22 +45,25 @@ class Product {
     Product({
         required this.id,
         required this.title,
+        required this.image,
         required this.imageType,
     });
 
     int id;
     String title;
     String imageType;
-
+    String image;
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
         title: json["title"],
+        image:json["image"],
         imageType: json["imageType"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
+        "image": image,
         "imageType": imageType,
     };
 }

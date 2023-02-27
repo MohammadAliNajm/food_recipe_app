@@ -16,6 +16,7 @@ import 'core/di/di_config.dart';
 import 'core/hive/hive_init.dart';
 import 'core/utils/logger/logger.dart';
 import 'firebase_options.dart';
+import 'module_product_info/ui/screens/product_info_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,15 +48,17 @@ void main() async {
     });
   });
 }
-
+final navigatorKey = GlobalKey<NavigatorState>();
 @injectable
 class MyApp extends StatelessWidget {
-  const MyApp();
-
+   MyApp();
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
       builder: (context, widget) => ResponsiveWrapper.builder(
           ClampingScrollWrapper.builder(context, widget!),
           breakpoints: const [
@@ -67,8 +70,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'OpenSans',
-        primarySwatch:greenTheme,
+        primarySwatch: greenTheme,
       ),
+      routes: {
+        '/productInfo' : (context) => getIt<ProductInfoScreen>()
+      },
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -94,19 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-        appBar: AppBar(
-        
-          title: Text(widget.title),
-        ),
+       
         body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: Container(child: CircularProgressIndicator()),
+              );
+            }
             if (snapshot.hasData) {
               return VerifyEmailPage();
-            }else if(snapshot.hasError) {
-             return Text('Error Occured');
+            } else if (snapshot.hasError) {
+              return Text('Error Occured');
             } else {
               return AuthScreens();
             }

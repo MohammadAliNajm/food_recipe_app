@@ -27,7 +27,10 @@ class SignInScreenState extends State<SignInScreen> {
   void initState() {
     loadingSnapshot = AsyncSnapshot.nothing();
     SignInRepo(this).loadingStream.listen((event) {
-      loadingSnapshot = event;
+      setState(() {
+        loadingSnapshot = event;
+      });
+      
     });
     super.initState();
   }
