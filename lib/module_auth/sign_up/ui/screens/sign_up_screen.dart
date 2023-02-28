@@ -21,7 +21,8 @@ final GlobalKey<FormState> _signupKey = GlobalKey<FormState>();
 TextEditingController emailController = TextEditingController();
 TextEditingController passController = TextEditingController();
 TextEditingController confirmController = TextEditingController();
-
+TextEditingController nameController = TextEditingController();
+TextEditingController ageController = TextEditingController();
 class SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                                 message: 'Passwords are unidentical').show(context);
                           }else {
                               SignupRepo(this).signUp(emailController.text.trim(),
-                              passController.text.trim());
+                              passController.text.trim(),20,'');
                           }
                         
                         }

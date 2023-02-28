@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class NutritionFactsWidget extends StatefulWidget {
   const NutritionFactsWidget({Key? key, required this.percentageFat,  required this.fat, required this.amountFat, required this.percentageProteins, required this.amountProteins, required this.proteins, required this.percentageCarbs, required this.amountCarbs, required this.carbs})
@@ -24,25 +25,41 @@ class _NutritionFactsWidgetState extends State<NutritionFactsWidget> {
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+       mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(
+            height: 60,
+            child: PieChart(
+              legendOptions: LegendOptions(showLegends: false),
+              chartType: ChartType.ring,
+              colorList: [
+                Colors.orange,
+                Colors.green,
+                Colors.purple
+              ],
+              dataMap: {
+              'fat': double.parse(widget.percentageFat),
+              'carbs': double.parse(widget.percentageCarbs),
+              'proteins': double.parse(widget.percentageProteins)
+            }),
+          ),
           Column(
             children: [
-          Text('${widget.percentageFat}%'), 
+          Text('${widget.percentageFat}%',style: TextStyle(color: Colors.orange),), 
           Text(widget.amountFat),
           Text(widget.fat)
           ]
           ),
            Column(
             children: [
-          Text('${widget.percentageProteins}%'), 
+          Text('${widget.percentageProteins}%',style: TextStyle(color: Colors.purple)), 
           Text(widget.amountProteins),
           Text(widget.proteins)
           ]
           ),
             Column(
             children: [
-          Text('${widget.percentageCarbs}%'), 
+          Text('${widget.percentageCarbs}%',style: TextStyle(color: Colors.green)), 
           Text(widget.amountCarbs),
           Text(widget.carbs)
           ]

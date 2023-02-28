@@ -62,6 +62,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
         : Scaffold(
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('We have sent a verification link to your email'),
                 CustomLoadingButton(

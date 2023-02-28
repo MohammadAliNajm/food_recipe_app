@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:food_recipe_app/core/constants/Colors.dart';
 import 'package:food_recipe_app/core/utils/custom_loading_button.dart';
 import 'package:food_recipe_app/module_auth/sign_in/ui/widgets/form_textfield.dart';
+import 'package:food_recipe_app/module_map_ing_to_prod/ui/screens/map_ingredients_screen.dart';
+import 'package:food_recipe_app/module_map_ing_to_prod/ui/widgets/ingredients_widget.dart';
 import 'package:food_recipe_app/module_products/ui/screen/products_screen.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -21,7 +23,7 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
   final user = FirebaseAuth.instance.currentUser!;
   TextEditingController searchController = TextEditingController();
-  final screens = [getIt<ProductsScreen>()];
+  final screens = [getIt<ProductsScreen>(), getIt<MapIngredientsScreen>()];
   int selectedindex = 0;
   @override
   Widget build(BuildContext context) {
@@ -29,18 +31,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
         bottomNavigationBar: MoltenBottomNavigationBar(
           onTabChange: (index) {
             setState(() {
-               selectedindex = index;
+              selectedindex = index;
+              ingredientsToSend.clear();
             });
-           
           },
           selectedIndex: selectedindex,
           tabs: [
             MoltenTab(icon: Icon(Icons.local_grocery_store)),
             MoltenTab(icon: Icon(Icons.local_grocery_store)),
-            MoltenTab(icon: Icon(Icons.local_grocery_store))
           ],
         ),
-        body: screens[0]
+        body: screens[selectedindex]
         // ResponsiveRowColumn(
         //     layout: ResponsiveRowColumnType.COLUMN,
         //     children: [

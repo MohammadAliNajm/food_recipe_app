@@ -14,7 +14,8 @@ class FormTextField extends StatelessWidget {
       this.password,
       this.last,
       this.readOnly,
-      required this.email,  this.padding});
+      required this.email,
+      this.padding, this.hasOnChanged});
   final double? padding;
   final String? hint;
   final TextEditingController controller;
@@ -24,10 +25,11 @@ class FormTextField extends StatelessWidget {
   final bool? last;
   final bool? readOnly;
   final bool email;
+  final Function(String)? hasOnChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(padding ?? 0),
+      padding: EdgeInsets.all(padding ?? 0),
       child: TextFormField(
         readOnly: readOnly ?? false,
         toolbarOptions: const ToolbarOptions(
@@ -53,6 +55,7 @@ class FormTextField extends StatelessWidget {
         onSaved: (newValue) {
           controller.text = newValue!;
         },
+        onChanged: hasOnChanged != null ? hasOnChanged : null,
         controller: controller,
         decoration: InputDecoration(
             prefixIcon: icon,

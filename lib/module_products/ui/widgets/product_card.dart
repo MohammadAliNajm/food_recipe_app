@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard(
-      {Key? key, required this.imageUrl, required this.productTitle, required this.onTap})
+      {Key? key,  this.imageUrl, required this.productTitle, required this.onTap})
       : super(key: key);
-  final String imageUrl;
+  final String? imageUrl;
   final String productTitle;
   final VoidCallback onTap;
   @override
@@ -19,11 +19,11 @@ class _ProductCardState extends State<ProductCard> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         onTap:widget.onTap,
-        leading: CachedNetworkImage(
+        leading:widget.imageUrl!= null ? CachedNetworkImage(
           height: 75,
           width: 50,
-          imageUrl: widget.imageUrl,
-        ),
+          imageUrl: widget.imageUrl.toString(),
+        ): null,
         title: Text(widget.productTitle),
         trailing: const Icon(Icons.more_horiz),
       ),

@@ -24,32 +24,7 @@ class ProductState extends States {
         child: ResponsiveRowColumn(
             layout: ResponsiveRowColumnType.COLUMN,
             children: [
-              ResponsiveRowColumnItem(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children:const [
-                   Padding(
-                    padding: EdgeInsets.only(left: 20.0),
-                    child: Text(
-                      'Search Products',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                ],
-              )),
-              ResponsiveRowColumnItem(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: FormTextField(
-                        controller: searchController,
-                        validator: false,
-                        email: false),
-                  ),
-                ),
-              ),
+          
               ResponsiveRowColumnItem(
                   child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
