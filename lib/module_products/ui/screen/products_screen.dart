@@ -28,46 +28,58 @@ class ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResponsiveRowColumn(
-          layout: ResponsiveRowColumnType.COLUMN,
-          children: [
-            ResponsiveRowColumnItem(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    'Search Products',
-                    style: TextStyle(fontSize: 20),
+      body: GestureDetector(
+        onTap: () {
+          var focus = FocusScope.of(context);
+        if (focus.canRequestFocus) {
+          focus.unfocus();
+        }
+        },
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: ResponsiveRowColumn(
+                layout: ResponsiveRowColumnType.COLUMN,
+                children: [
+                  ResponsiveRowColumnItem(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          'Search Products',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  )),
+                  ResponsiveRowColumnItem(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: FormTextField(
+                            hasOnChanged: (val) {
+                              widget.cubit.getProducts(this, val);
+                            },
+                            controller: searchController,
+                            validator: false,
+                            email: false),
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            )),
-            ResponsiveRowColumnItem(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: FormTextField(
-                      hasOnChanged: (val) {
-                        widget.cubit.getProducts(this, val);
-                      },
-                      controller: searchController,
-                      validator: false,
-                      email: false),
-                ),
-              ),
-            ),
-            ResponsiveRowColumnItem(
-              child: BlocBuilder<ProductsCubit, States>(
-                  bloc: widget.cubit,
-                  builder: (context, state) {
-                    return state.getUI(context);
-                  }),
-            ),
-          ]),
+                  ResponsiveRowColumnItem(
+                    child: BlocBuilder<ProductsCubit, States>(
+                        bloc: widget.cubit,
+                        builder: (context, state) {
+                          return state.getUI(context);
+                        }),
+                  ),
+                ]),
+          ),
+        ),
+      ),
     );
   }
 }

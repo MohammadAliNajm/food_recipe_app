@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipe_app/core/constants/Colors.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class NutritionFactsWidget extends StatefulWidget {
@@ -22,14 +23,16 @@ class _NutritionFactsWidgetState extends State<NutritionFactsWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: greyColor, width: 2)),
       child: Row(
        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 60,
+            height: 80,
             child: PieChart(
+              ringStrokeWidth: 10,
               legendOptions: LegendOptions(showLegends: false),
               chartType: ChartType.ring,
               colorList: [

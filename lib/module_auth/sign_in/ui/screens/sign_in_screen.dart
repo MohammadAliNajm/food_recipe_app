@@ -41,88 +41,93 @@ class SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+var focus = FocusScope.of(context);
+        if (focus.canRequestFocus) {
+          focus.unfocus();
+        }
       },
-      child: SingleChildScrollView(
-        child: Form(
-          key: _signinKey,
-          child: ResponsiveRowColumn(
-            layout: ResponsiveRowColumnType.COLUMN,
-            children: [
-              ResponsiveRowColumnItem(child: LogoWidget(text: 'Sign in to your account')),
-              ResponsiveRowColumnItem(
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: FormTextField(
-                    controller: emailController,
-                    validator: true,
-                    hint: 'Email', email: false,
-                  ),
-                ),
-              ),
-              ResponsiveRowColumnItem(
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: FormTextField(
-                    controller: passController,
-                    validator: true,
-                    password: true,
-                    hint: 'Password',
-                   email: false,
-                  ),
-                ),
-              ),
-              ResponsiveRowColumnItem(
-                child: ResponsiveRowColumn(
-                  rowMainAxisAlignment: MainAxisAlignment.end,
-                  layout: ResponsiveRowColumnType.ROW,
-                  children: [
-                    ResponsiveRowColumnItem(
-                      child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ForgotScreen()));
-                          },
-                          child: const Text('Forgot password?')),
-                    )
-                  ],
-                ),
-              ),
-              ResponsiveRowColumnItem(
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _signinKey,
+            child: ResponsiveRowColumn(
+              layout: ResponsiveRowColumnType.COLUMN,
+              children: [
+                ResponsiveRowColumnItem(child: LogoWidget(text: 'Sign in to your account')),
+                ResponsiveRowColumnItem(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: CustomLoadingButton(
-                bgColor: greenColor,
-                textColor: Colors.white,
-                loading: loadingSnapshot.connectionState ==
-                        ConnectionState.waiting,
-                text: 'Sign in',
-                buttonTab: () {
-                    if (_signinKey.currentState!.validate()) {
-                      SignInRepo(this).SignIn(
-                          emailController.text.trim(), passController.text.trim());
-                    }
-                },
-              ),
-                  )),
-              ResponsiveRowColumnItem(
-                child: ResponsiveRowColumn(
-                  layout: ResponsiveRowColumnType.ROW,
-                  rowMainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ResponsiveRowColumnItem(
-                      child: Text("Don't have an account?"),
+                    padding: const EdgeInsets.all(14.0),
+                    child: FormTextField(
+                      controller: emailController,
+                      validator: true,
+                      hint: 'Email', email: false,
                     ),
-                    ResponsiveRowColumnItem(
-                      child: TextButton(
-                          onPressed: widget.toggle, child: Text('Sign Up')),
-                    )
-                  ],
+                  ),
                 ),
-              )
-            ],
+                ResponsiveRowColumnItem(
+                  child: Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: FormTextField(
+                      controller: passController,
+                      validator: true,
+                      password: true,
+                      hint: 'Password',
+                     email: false,
+                    ),
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                  child: ResponsiveRowColumn(
+                    rowMainAxisAlignment: MainAxisAlignment.end,
+                    layout: ResponsiveRowColumnType.ROW,
+                    children: [
+                      ResponsiveRowColumnItem(
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const ForgotScreen()));
+                            },
+                            child: const Text('Forgot password?')),
+                      )
+                    ],
+                  ),
+                ),
+                ResponsiveRowColumnItem(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: CustomLoadingButton(
+                  bgColor: greenColor,
+                  textColor: Colors.white,
+                  loading: loadingSnapshot.connectionState ==
+                          ConnectionState.waiting,
+                  text: 'Sign in',
+                  buttonTab: () {
+                      if (_signinKey.currentState!.validate()) {
+                        SignInRepo(this).SignIn(
+                            emailController.text.trim(), passController.text.trim());
+                      }
+                  },
+                ),
+                    )),
+                ResponsiveRowColumnItem(
+                  child: ResponsiveRowColumn(
+                    layout: ResponsiveRowColumnType.ROW,
+                    rowMainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ResponsiveRowColumnItem(
+                        child: Text("Don't have an account?"),
+                      ),
+                      ResponsiveRowColumnItem(
+                        child: TextButton(
+                            onPressed: widget.toggle, child: Text('Sign Up')),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

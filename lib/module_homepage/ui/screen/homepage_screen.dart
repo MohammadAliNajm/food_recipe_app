@@ -41,7 +41,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
             MoltenTab(icon: Icon(Icons.local_grocery_store)),
           ],
         ),
-        body: screens[selectedindex]
+        body: IndexedStack(
+          index: selectedindex,
+          children: screens)
         // ResponsiveRowColumn(
         //     layout: ResponsiveRowColumnType.COLUMN,
         //     children: [

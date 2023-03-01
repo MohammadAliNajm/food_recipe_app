@@ -57,6 +57,7 @@ class ProductInfoState extends States {
                         carbs: 'Carb'))),
             ResponsiveRowColumnItem(
                 child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                     itemCount: response.nutrition.nutrients.length,
                     itemBuilder: (context, index) {
