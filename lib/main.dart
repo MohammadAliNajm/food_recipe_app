@@ -10,6 +10,7 @@ import 'package:food_recipe_app/module_auth/sign_in/ui/screens/auth_pages.dart';
 import 'package:food_recipe_app/module_auth/sign_in/ui/screens/sign_in_screen.dart';
 import 'package:food_recipe_app/module_homepage/ui/screen/homepage_screen.dart';
 import 'package:food_recipe_app/module_homepage/ui/screen/verify_email_screen.dart';
+import 'package:food_recipe_app/module_splash/splash_screen.dart';
 import 'package:injectable/injectable.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'core/di/di_config.dart';
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'OpenSans',
-        primarySwatch: greenTheme,
+        primarySwatch: kiwiGreen,
       ),
       routes: {
         '/productInfo' : (context) => getIt<ProductInfoScreen>()
@@ -95,23 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       resizeToAvoidBottomInset: false,
+        body: SplashScreen()
        
-        body: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: Container(child: CircularProgressIndicator()),
-              );
-            }
-            if (snapshot.hasData) {
-              return VerifyEmailPage();
-            } else if (snapshot.hasError) {
-              return Text('Error Occured');
-            } else {
-              return AuthScreens();
-            }
-          },
-        ));
+        );
   }
 }

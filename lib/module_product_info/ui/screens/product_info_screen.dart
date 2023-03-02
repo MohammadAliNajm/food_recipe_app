@@ -34,11 +34,23 @@ class ProductInfoScreenState extends State<ProductInfoScreen> {
       );
     }
     return Scaffold(
+      appBar: AppBar(
+        title:const  Text(
+          'Product Info',
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+          icon:const  Icon(Icons.arrow_back_rounded,color: Colors.white,),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: BlocBuilder<ProductsInfoCubit, States>(
-        bloc: widget.cubit,
-        builder: (context, state) {
-        return state.getUI(context);
-      }),
+          bloc: widget.cubit,
+          builder: (context, state) {
+            return state.getUI(context);
+          }),
     );
   }
 }

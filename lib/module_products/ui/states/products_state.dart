@@ -19,42 +19,22 @@ class ProductState extends States {
   @override
   Widget getUI(BuildContext context) {
     TextEditingController searchController = TextEditingController();
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: ResponsiveRowColumn(
-            layout: ResponsiveRowColumnType.COLUMN,
-            children: [
-          
-              ResponsiveRowColumnItem(
-                  child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: response.products.length,
-                itemBuilder: (context, index) {
-                  return Hero(
-                    tag:response.products[index].id,
-                    child: ProductCard(
-                      imageUrl: response.products[index].image,
-                      productTitle: response.products[index].title,
-                      onTap: () {
-                        Navigator.pushNamed(context, '/productInfo',arguments: response.products[index].id);
-                      },
-                    ),
-                  );
-                },
-              )),
-              ResponsiveRowColumnItem(
-                  child: CustomLoadingButton(
-                bgColor: greenColor,
-                text: 'Sign out',
-                buttonTab: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                textColor: Colors.white,
-                loading: false,
-              )),
-            ]),
+    return response.products.isNotEmpty ? ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: response.products.length,
+      itemBuilder: (context, index) {
+    return Hero(
+      tag:response.products[index].id,
+      child: ProductCard(
+        imageUrl: response.products[index].image,
+        productTitle: response.products[index].title,
+        onTap: () {
+          Navigator.pushNamed(context, '/productInfo',arguments: response.products[index].id);
+        },
       ),
     );
+      },
+    ): Center(child: Text('Search For Groceries!'),);
   }
 }

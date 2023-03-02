@@ -29,7 +29,7 @@ void main() {
   )).thenAnswer((_) async => response);
 
   // Call the method under test
-  final result = await productsRepo.getProducts('greek');
+  final result = await productsRepo.getProducts('top products');
 
   // Verify the result
   expect(result, isNotNull);

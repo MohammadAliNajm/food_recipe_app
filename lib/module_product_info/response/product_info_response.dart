@@ -60,12 +60,12 @@ class ProductInfoResponse {
         id: json["id"],
         title: json["title"],
         price: json["price"],
-        likes: json["likes"],
+        likes: json["likes"] ?? 0,
         badges: List<String>.from(json["badges"].map((x) => x)),
         importantBadges: List<String>.from(json["importantBadges"].map((x) => x)),
         nutrition: Nutrition.fromJson(json["nutrition"]),
         servings: Servings.fromJson(json["servings"]),
-        spoonacularScore: json["spoonacularScore"],
+        spoonacularScore: json["spoonacularScore"] ?? 0,
         breadcrumbs: List<String>.from(json["breadcrumbs"].map((x) => x)),
         aisle: json["aisle"]?? '',
         description: json["description"],
@@ -73,8 +73,8 @@ class ProductInfoResponse {
         imageType: json["imageType"],
         images: List<String>.from(json["images"].map((x) => x)),
         generatedText: json["generatedText"],
-        upc: json["upc"],
-        brand: json["brand"],
+        upc: json["upc"] ?? '',
+        brand: json["brand"] ?? '',
         ingredients: List<Ingredient>.from(json["ingredients"].map((x) => Ingredient.fromJson(x))),
         ingredientCount: json["ingredientCount"],
         ingredientList: json["ingredientList"],
@@ -149,10 +149,10 @@ class Nutrition {
     factory Nutrition.fromJson(Map<String, dynamic> json) => Nutrition(
         nutrients: List<Nutrient>.from(json["nutrients"].map((x) => Nutrient.fromJson(x))),
         caloricBreakdown: CaloricBreakdown.fromJson(json["caloricBreakdown"]),
-        calories: json["calories"],
-        fat: json["fat"],
-        protein: json["protein"],
-        carbs: json["carbs"],
+        calories: json["calories"] ?? 0,
+        fat: json["fat"] ?? '',
+        protein: json["protein"] ?? '',
+        carbs: json["carbs"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -177,9 +177,9 @@ class CaloricBreakdown {
     double percentCarbs;
 
     factory CaloricBreakdown.fromJson(Map<String, dynamic> json) => CaloricBreakdown(
-        percentProtein: json["percentProtein"]?.toDouble(),
-        percentFat: json["percentFat"],
-        percentCarbs: json["percentCarbs"]?.toDouble(),
+        percentProtein: json["percentProtein"]?.toDouble() ?? 0.0,
+        percentFat: json["percentFat"] ?? 0.0,
+        percentCarbs: json["percentCarbs"]?.toDouble() ?? 0.0,
     );
 
     Map<String, dynamic> toJson() => {
@@ -203,10 +203,10 @@ class Nutrient {
     double percentOfDailyNeeds;
 
     factory Nutrient.fromJson(Map<String, dynamic> json) => Nutrient(
-        name: json["name"],
-        amount: json["amount"]?.toDouble(),
-        unit: json["unit"],
-        percentOfDailyNeeds: json["percentOfDailyNeeds"]?.toDouble(),
+        name: json["name"] ?? '',
+        amount: json["amount"]?.toDouble() ?? 0.0,
+        unit: json["unit"] ?? '',
+        percentOfDailyNeeds: json["percentOfDailyNeeds"]?.toDouble() ?? 0.0,
     );
 
     Map<String, dynamic> toJson() => {
@@ -229,9 +229,9 @@ class Servings {
     String unit;
 
     factory Servings.fromJson(Map<String, dynamic> json) => Servings(
-        number: json["number"],
-        size: json["size"],
-        unit: json["unit"],
+        number: json["number"] ?? 0,
+        size: json["size"] ?? 0 ,
+        unit: json["unit"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {

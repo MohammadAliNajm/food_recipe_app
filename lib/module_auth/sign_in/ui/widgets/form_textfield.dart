@@ -60,9 +60,7 @@ class FormTextField extends StatelessWidget {
         decoration: InputDecoration(
             prefixIcon: icon,
             hintText: hint,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: greyColor)),
+           border: OutlineInputBorder(borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: greenColor))),

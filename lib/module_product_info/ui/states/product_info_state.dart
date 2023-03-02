@@ -16,58 +16,58 @@ class ProductInfoState extends States {
   Widget getUI(BuildContext context) {
     return SafeArea(
         child: SingleChildScrollView(
-      child: Hero(
-        tag: response.id,
-        child: ResponsiveRowColumn(
-          layout: ResponsiveRowColumnType.COLUMN,
-          children: [
-            ResponsiveRowColumnItem(
+      child: ResponsiveRowColumn(
+        layout: ResponsiveRowColumnType.COLUMN,
+        children: [
+          ResponsiveRowColumnItem(
+              child: Hero(
+                tag: response.id,
                 child: CachedNetworkImage(
-              imageUrl: response.image,
-              fit: BoxFit.fill,
-              width: MediaQuery.of(context).size.width,
-              height: 250,
-            )),
-            ResponsiveRowColumnItem(
-                child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                response.title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            )),
-            ResponsiveRowColumnItem(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: NutritionFactsWidget(
-                        percentageFat: response
-                            .nutrition.caloricBreakdown.percentFat
-                            .toString(),
-                        fat: 'Fat',
-                        amountFat: response.nutrition.fat,
-                        percentageProteins: response
-                            .nutrition.caloricBreakdown.percentProtein
-                            .toString(),
-                        amountProteins: response.nutrition.protein,
-                        proteins: 'Protein',
-                        percentageCarbs: response
-                            .nutrition.caloricBreakdown.percentCarbs
-                            .toString(),
-                        amountCarbs: response.nutrition.carbs,
-                        carbs: 'Carb'))),
-            ResponsiveRowColumnItem(
-                child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                    itemCount: response.nutrition.nutrients.length,
-                    itemBuilder: (context, index) {
-                   return   ListTile(
-                        leading: Text(response.nutrition.nutrients[index].name),
-                        trailing: Text("${response.nutrition.nutrients[index].amount}g"),
-                      );
-                    })),
-          ],
-        ),
+                          imageUrl: response.image,
+                          fit: BoxFit.fill,
+                          width: MediaQuery.of(context).size.width,
+                          height: 250,
+                        ),
+              )),
+          ResponsiveRowColumnItem(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              response.title,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          )),
+          ResponsiveRowColumnItem(
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: NutritionFactsWidget(
+                      percentageFat: response
+                          .nutrition.caloricBreakdown.percentFat
+                          .toString(),
+                      fat: 'Fat',
+                      amountFat: response.nutrition.fat,
+                      percentageProteins: response
+                          .nutrition.caloricBreakdown.percentProtein
+                          .toString(),
+                      amountProteins: response.nutrition.protein,
+                      proteins: 'Protein',
+                      percentageCarbs: response
+                          .nutrition.caloricBreakdown.percentCarbs
+                          .toString(),
+                      amountCarbs: response.nutrition.carbs,
+                      carbs: 'Carb'))),
+          ResponsiveRowColumnItem(
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                  itemCount: response.nutrition.nutrients.length,
+                  itemBuilder: (context, index) {
+                 return   ListTile(
+                      leading: Text(response.nutrition.nutrients[index].name),
+                      trailing: Text("${response.nutrition.nutrients[index].amount}g"),
+                    );
+                  })),
+        ],
       ),
     ));
   }

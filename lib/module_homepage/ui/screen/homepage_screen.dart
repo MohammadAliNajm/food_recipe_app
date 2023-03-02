@@ -21,14 +21,17 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  final user = FirebaseAuth.instance.currentUser!;
+  
   TextEditingController searchController = TextEditingController();
   final screens = [getIt<ProductsScreen>(), getIt<MapIngredientsScreen>()];
   int selectedindex = 0;
+  
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
     return Scaffold(
-        bottomNavigationBar: MoltenBottomNavigationBar(
+      resizeToAvoidBottomInset: false,
+        bottomNavigationBar: isKeyboardOpen? null : MoltenBottomNavigationBar(
           onTabChange: (index) {
             setState(() {
               selectedindex = index;
@@ -38,7 +41,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
           selectedIndex: selectedindex,
           tabs: [
             MoltenTab(icon: Icon(Icons.local_grocery_store)),
-            MoltenTab(icon: Icon(Icons.local_grocery_store)),
+            MoltenTab(icon: Icon(Icons.egg)),
           ],
         ),
         body: IndexedStack(

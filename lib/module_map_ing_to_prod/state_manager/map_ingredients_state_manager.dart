@@ -34,7 +34,7 @@ class MapIngredientsCubit extends Cubit<States> {
             }));
       } else if (value.statusCode == 200) {
         List<MapIngredientsResponse> prods = [];
-
+_loadingStateSubject.add(AsyncSnapshot.nothing());
         for (var item in value.data) {
           prods.add(MapIngredientsResponse.fromJson(item));
         }

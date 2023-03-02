@@ -21,13 +21,14 @@ class ProductsScreenState extends State<ProductsScreen> {
   @override
   void initState() {
     super.initState();
-    widget.cubit.getProducts(this, 'greek');
+    widget.cubit.getProducts(this, ' ');
   }
 
   TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () {
           var focus = FocusScope.of(context);
@@ -36,30 +37,33 @@ class ProductsScreenState extends State<ProductsScreen> {
         }
         },
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: ResponsiveRowColumn(
-                layout: ResponsiveRowColumnType.COLUMN,
-                children: [
-                  ResponsiveRowColumnItem(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.only(left: 20.0),
-                        child: Text(
-                          'Search Products',
-                          style: TextStyle(fontSize: 20),
-                        ),
+          child: RefreshIndicator(
+            onRefresh: () async{
+                        widget.cubit.getProducts(this, ' ');
+                      },
+            child: SingleChildScrollView(
+              child: Column(
+                  
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0),
+                      child: Text(
+                        'Search Groceries',
+                        style: TextStyle(fontSize: 20),
                       ),
-                    ],
-                  )),
-                  ResponsiveRowColumnItem(
-                    child: Padding(
+                    ),
+                      ],
+                    ),
+                    Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         child: FormTextField(
+                          icon: Icon(Icons.search),
                             hasOnChanged: (val) {
                               widget.cubit.getProducts(this, val);
                             },
@@ -68,15 +72,13 @@ class ProductsScreenState extends State<ProductsScreen> {
                             email: false),
                       ),
                     ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    child: BlocBuilder<ProductsCubit, States>(
+                    BlocBuilder<ProductsCubit, States>(
                         bloc: widget.cubit,
                         builder: (context, state) {
                           return state.getUI(context);
                         }),
-                  ),
-                ]),
+                  ]),
+            ),
           ),
         ),
       ),

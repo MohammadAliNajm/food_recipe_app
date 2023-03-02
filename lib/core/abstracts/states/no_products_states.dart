@@ -13,9 +13,14 @@ import 'state.dart';
 class NoProductsState extends States {
   @override
   Widget getUI(BuildContext context) {
-    return Center(
-      child: Center(
-        child:Text('No Products Here!'),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+          child:Text('No Products Here!'),
+        ),]
       ),
     );
   }
