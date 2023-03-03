@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipe_app/core/abstracts/states/error_state.dart';
 import 'package:food_recipe_app/core/abstracts/states/loading_state.dart';
+import 'package:food_recipe_app/core/abstracts/states/no_data_available.dart';
 import 'package:injectable/injectable.dart';
 import '../../core/abstracts/states/state.dart';
 import '../repository/product_info_repo.dart';
@@ -29,7 +30,12 @@ class ProductsInfoCubit extends Cubit<States> {
 
         ProductInfoResponse resp = ProductInfoResponse.fromJson(data);
         print(data);
-        emit(ProductInfoState(resp, state));
+        if (resp.nutrition.calories == null) {
+          emit(NoDataState());
+        }else {
+           emit(ProductInfoState(resp, state));
+        }
+       
       }
     });
   }

@@ -65,7 +65,7 @@ class MapIngredientsScreenState extends State<MapIngredientsScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'Map Ingredients to Products!',
+                    'Search an ingredient and find a product that contains it!',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),

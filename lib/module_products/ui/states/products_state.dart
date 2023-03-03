@@ -1,14 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:food_recipe_app/module_products/ui/screen/products_screen.dart';
 import 'package:food_recipe_app/module_products/ui/widgets/product_card.dart';
-import 'package:responsive_framework/responsive_framework.dart';
-
 import '../../../core/abstracts/states/state.dart';
-import '../../../core/constants/Colors.dart';
-import '../../../core/utils/custom_loading_button.dart';
-import '../../../module_auth/sign_in/ui/widgets/form_textfield.dart';
 import '../../response/products_response.dart';
 
 class ProductState extends States {
@@ -35,6 +29,6 @@ class ProductState extends States {
       ),
     );
       },
-    ): Center(child: Text('Search For Groceries!'),);
+    ):const  Center(child: Text('Search For Groceries!'),);
   }
 }

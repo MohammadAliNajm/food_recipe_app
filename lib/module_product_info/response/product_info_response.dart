@@ -141,7 +141,7 @@ class Nutrition {
 
     List<Nutrient> nutrients;
     CaloricBreakdown caloricBreakdown;
-    num calories;
+    num? calories;
     String fat;
     String protein;
     String carbs;
@@ -149,7 +149,7 @@ class Nutrition {
     factory Nutrition.fromJson(Map<String, dynamic> json) => Nutrition(
         nutrients: List<Nutrient>.from(json["nutrients"].map((x) => Nutrient.fromJson(x))),
         caloricBreakdown: CaloricBreakdown.fromJson(json["caloricBreakdown"]),
-        calories: json["calories"] ?? 0,
+        calories: json["calories"],
         fat: json["fat"] ?? '',
         protein: json["protein"] ?? '',
         carbs: json["carbs"] ?? '',
